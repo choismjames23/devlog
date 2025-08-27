@@ -1,0 +1,31 @@
+[project]
+name = "devlog"
+version = "0.1.0"
+description = "My Own Blog with Dev story"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "django>=5.2.5",
+    "django-extensions>=4.1",
+    "dotenv>=0.9.9",
+    "ipython>=9.4.0",
+]
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "isort>=6.0.1",
+    "mypy>=1.17.1",
+]
+
+[tool.mypy]
+python_version = "3.13"                # 코드가 Python 3.13 기준으로 작성되었음을 명시
+plugins = ["mypy_django_plugin.main"]  # Django 프로젝트용 mypy plugin 적용
+ignore_missing_imports = true          # 설치되지 않은 패키지 import 에러 무시
+disable_error_code = ["var-annotated"] # 특정 오류 코드(var-annotated) 무시
+
+
+[tool.isort]
+# black과 포맷 스타일을 맞춤
+profile="black"
+
