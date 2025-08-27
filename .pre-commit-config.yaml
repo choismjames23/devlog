@@ -1,0 +1,28 @@
+# git commit 전에 실행되는 훅
+# black, isort 포맷터 적용
+# mypy 정적 타입 검사
+
+repos:
+  - repo: local
+    hooks:
+      - id: black
+        name: starting black
+        language: system
+        entry: uv run black
+        files: \.py$
+
+  - repo: local
+    hooks:
+      - id: isort
+        name: starting isort
+        language: system
+        entry: uv run isort
+        files: \.py$
+
+  - repo: local
+    hooks:
+      - id: mypy
+        name: starting mypy
+        language: system
+        entry: uv run mypy
+        files: \.py$
