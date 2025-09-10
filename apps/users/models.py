@@ -1,9 +1,13 @@
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.db import models
 from django.utils import timezone
 
 
-class UserManager(models.Manager):
+class UserManager(BaseUserManager):
     """커스텀 유저 매니저 - 이메일을 username으로 사용"""
 
     def create_user(self, email, password=None, **extra_fields):
@@ -61,7 +65,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ["name"]
 
     class Meta:
         verbose_name = "사용자"
