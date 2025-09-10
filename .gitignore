@@ -3,6 +3,8 @@
 
 envs/.local.env
 
+.cursor/*
+
 ### Django ###
 *.log
 *.pot

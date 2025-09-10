@@ -28,6 +28,7 @@ python_version = "3.13"                # 코드가 Python 3.13 기준으로 작�
 plugins = ["mypy_django_plugin.main"]  # Django 프로젝트용 mypy plugin 적용
 ignore_missing_imports = true          # 설치되지 않은 패키지 import 에러 무시
 disable_error_code = ["var-annotated"] # 특정 오류 코드(var-annotated) 무시
+explicit_package_bases = true          # 명시적 패키지 베이스 사용으로 모듈 충돌 해결
 
 [tool.django-stubs]
 django_settings_module = 'config.settings.local'

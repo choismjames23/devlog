@@ -40,7 +40,10 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-MY_APPS = []
+MY_APPS = [
+    "apps.users",
+    "apps.posts",
+]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
@@ -131,6 +134,9 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# 커스텀 유저 모델 설정
+AUTH_USER_MODEL = "users.User"
 
 
 # REST Framework 설정
