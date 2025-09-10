@@ -60,7 +60,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: pw1234
-          POSTGRES_DB: hanjan_be
+          POSTGRES_DB: devlog
           TZ: Asia/Seoul
         options: >-
           --health-cmd pg_isready
@@ -112,7 +112,7 @@ jobs:
           DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
           DB_HOST: localhost
           DB_PORT: 5432
-          DB_NAME: hanjan_be
+          DB_NAME: devlog
           DB_USER: postgres
           DB_PASSWORD: pw1234
         run: |
@@ -124,12 +124,12 @@ jobs:
           DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
           DB_HOST: localhost
           DB_PORT: 5432
-          DB_NAME: hanjan_be
+          DB_NAME: devlog
           DB_USER: postgres
           DB_PASSWORD: pw1234
         run: |
           ran_tests=false
-          apps="users taste_test feedback products orders adminpanel common"
+          apps="users posts"
 
           for app_name in $apps; do
             app_path="apps/$app_name"
