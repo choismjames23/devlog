@@ -49,11 +49,13 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "django_extensions",
     "drf_spectacular",
+    "corsheaders",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + MY_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -68,7 +70,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -174,3 +176,41 @@ SPECTACULAR_SETTINGS = {
 
 # Google OAuth
 GOOGLE_CLIENT_ID: Optional[str] = os.getenv("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET: Optional[str] = os.getenv("GOOGLE_CLIENT_SECRET")
+GOOGLE_REDIRECT_URI: Optional[str] = os.getenv("GOOGLE_REDIRECT_URI")
+if not GOOGLE_CLIENT_ID:
+    # 환경 변수가 없으면 .env 파일에서 직접 읽기
+    try:
+        with open(BASE_DIR / "envs/.local.env", "r", encoding="utf-8") as f:
+            for line in f:
+                if line.startswith("GOOGLE_CLIENT_ID="):
+                    GOOGLE_CLIENT_ID = line.split("=", 1)[1].strip()
+                if line.startswith("GOOGLE_CLIENT_SECRET="):
+                    GOOGLE_CLIENT_SECRET = line.split("=", 1)[1].strip()
+                if line.startswith("GOOGLE_REDIRECT_URI="):
+                    GOOGLE_REDIRECT_URI = line.split("=", 1)[1].strip()
+                    break
+    except FileNotFoundError:
+        pass
+
+print(f"DEBUG: GOOGLE_CLIENT_ID = {GOOGLE_CLIENT_ID}")  # 디버깅용
+
+# CORS 설정
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True  # 개발 환경에서만 사용
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]

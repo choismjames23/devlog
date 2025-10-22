@@ -23,6 +23,8 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 
+from apps.users.views import IndexView
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     # Swagger and Redoc URL patterns
@@ -38,4 +40,5 @@ urlpatterns = [
         name="redoc",
     ),
     path("api/v1/", include("apps.users.urls")),
+    path("", IndexView, name="index"),
 ]

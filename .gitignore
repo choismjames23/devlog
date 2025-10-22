@@ -4,6 +4,7 @@
 envs/.local.env
 
 .cursor/*
+.claude/*
 
 ### Django ###
 *.log
